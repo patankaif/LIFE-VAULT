@@ -14,7 +14,7 @@ import axios from 'axios'
 import Root from './components/Root'
 
 
-axios.defaults.baseURL='http://localhost:8000';
+axios.defaults.baseURL='https://life-vault.onrender.com/';
 axios.defaults.withCredentials=true
 
 function App() {

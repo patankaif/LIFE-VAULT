@@ -20,9 +20,16 @@ app.use(express.json());
 // Routes
 app.use("/api/users", authRoutes);
 
-// MongoDB connection
-mongoose.connect(process.env.MONGO_URL)
-  .then(() => console.log("✅ MongoDB connected"))
-  .catch(err => console.error("❌ DB connection error:", err));
+// MongoDB connection and server start
+const start = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URL);
+    console.log("✅ MongoDB connected");
+    app.listen(port, () => console.log(`🚀 Server running on port ${port}`));
+  } catch (err) {
+    console.error("❌ DB connection error:", err);
+    process.exit(1);
+  }
+};
 
-app.listen(port, () => console.log(`🚀 Server running on port ${port}`));
+start();
